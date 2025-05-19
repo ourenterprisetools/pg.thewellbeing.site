@@ -529,53 +529,5 @@
 </script>
 <!-- ====== /TRACKING ======================================================= -->
 
-    <script>
-(function () {
-  const SUB_KEYS = ['subid', 'subid2', 'subid3', 'subid4', 'subid5'];
-
-  /* 1 ▸ captura subIDs da URL na primeira visita e salva */
-  (function saveFromQuery () {
-    const params = new URLSearchParams(location.search);
-    SUB_KEYS.forEach(k => {
-      if (params.has(k) && params.get(k)) {
-        localStorage.setItem(k, params.get(k));
-      }
-    });
-  })();
-
-  /* 2 ▸ helper para recuperar os subIDs salvos como objeto */
-  function getSavedSubIds () {
-    return SUB_KEYS.reduce((acc, k) => {
-      const v = localStorage.getItem(k);
-      if (v) acc[k] = v;
-      return acc;
-    }, {});
-  }
-
-  /* 3 ▸ helper: devolve nova URL com os subIDs anexados           */
-  /*    ‑ aceita string ou objeto URL; devolve string URL final.   */
-  window.appendSubIds = function (inputUrl) {
-    const url = new URL(inputUrl, location.origin);
-    const subs = getSavedSubIds();
-    Object.entries(subs).forEach(([k, v]) => {
-      if (!url.searchParams.has(k)) url.searchParams.set(k, v);
-    });
-    return url.toString();
-  };
-
-  /* 4 ▸ (opcional) exemplo de uso automático em todos <a> internos */
-  /*    ‑ se não quiser, pode remover este bloco.                  */
-  document.addEventListener('click', e => {
-    const a = e.target.closest('a');
-    if (!a) return;
-    /* só altera links dentro do seu domínio */
-    const u = new URL(a.href, location.origin);
-    if (u.origin !== location.origin) return;
-    a.href = appendSubIds(a.href);
-  }, true);
-
-})();
-</script>
-
   </body>
 </html>
