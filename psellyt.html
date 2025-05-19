@@ -4,64 +4,110 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Advertorial Page</title>
+
+    <!-- Font & Icons -->
     <link
       rel="stylesheet"
       href="css/all.min.css"
       referrerpolicy="no-referrer"
     />
-    <link rel="icon" href="assets/oficial.png" type="image/png" />
-    <link rel="stylesheet" type="text/css" href="css/style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2%EF%B9%96family=Roboto%EF%B9%95ital,wght@0,100%EF%B9%940,300%EF%B9%940,400%EF%B9%940,500%EF%B9%940,700%EF%B9%940,900%EF%B9%941,100%EF%B9%941,300%EF%B9%941,400%EF%B9%941,500%EF%B9%941,700%EF%B9%941,900&display=swap.css"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap"
       rel="stylesheet"
     />
 
-    <!-- TRACKING SCRIPT START -->
+    <!-- Favicon & Base CSS -->
+    <link rel="icon" href="assets/oficial.png" type="image/png" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+
+    <!-- === COLOR OVERRIDES & MINOR TWEAKS === -->
+    <style>
+      :root {
+        --brand-color: #1d4ed8; /* main blue */
+        --accent-color: #2563eb; /* hover / accent */
+        --bg-color: #f0f9ff; /* soft backdrop */
+        --text-color: #111827; /* dark slate */
+      }
+      body {
+        background: var(--bg-color);
+        color: var(--text-color);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+      }
+      main#container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .headline b {
+        color: var(--brand-color);
+      }
+      .watch-button {
+        background: var(--brand-color);
+        color: #fff;
+        padding: 1rem 2rem;
+        border-radius: 8px;
+        font-weight: 700;
+        text-decoration: none;
+        display: inline-block;
+      }
+      .watch-button:hover {
+        background: var(--accent-color);
+      }
+      .checks i {
+        color: var(--brand-color);
+      }
+      footer {
+        margin-top: 2rem;
+        text-align: center;
+      }
+      footer nav a {
+        margin: 0 0.5rem;
+        text-decoration: none;
+        color: var(--text-color);
+      }
+    </style>
+
+    <!-- TRACKING SCRIPT (unchanged) -->
     <script>
       function getURLParameters() {
-        const params = {};
-        const queryString = window.location.search.substring(1);
-        const regex = /([^&=]+)=([^&]*)/g;
-        let m;
-        while ((m = regex.exec(queryString))) {
-          params[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
-        }
+        const params = {},
+          q = window.location.search.substring(1).split("&");
+        q.forEach((p) => {
+          const [k, v] = p.split("=");
+          if (k) params[decodeURIComponent(k)] = decodeURIComponent(v);
+        });
         return params;
       }
       function appendParamsToLinks() {
-        const params = getURLParameters();
-        const links = document.querySelectorAll("a[href]");
-        links.forEach((link) => {
-          const url = new URL(link.href);
-          for (const key in params) {
-            url.searchParams.set(key, params[key]);
+        const p = getURLParameters();
+        document.querySelectorAll("a[href]").forEach((a) => {
+          const u = new URL(a.href);
+          for (const k in p) {
+            u.searchParams.set(k, p[k]);
           }
-          link.href = url.toString();
+          a.href = u.toString();
         });
       }
       window.onload = appendParamsToLinks;
     </script>
-    <!-- TRACKING SCRIPT END -->
   </head>
+
   <body>
     <main id="container">
       <div class="container">
         <div class="text">
           <h1 class="headline">
-            Morning <b>“CINNAMON DRINK”</b> ​F​і​х​е​d​ ​М​у​ ​Н​I​G​Н​ ​​
-            В​l​о​о​d​ ​Ѕ​u​g​а​r​
+            A Simple Morning <b>“CINNAMON TONIC”</b> Balanced My High Blood
+            Sugar
           </h1>
-          <div
-            class="video-thumbnail mobile-only"
-            style="display: flex; justify-content: center"
-          >
-            <!-- Link para página -->
-            <a href="https://pg.thehealth-now.site/pg">
-              <img src="assets/splitimage.png" alt="Descrição da Imagem" />
-            </a>
-          </div>
+
           <style>
             @media (min-width: 739px) {
               .video-thumbnail.mobile-only {
@@ -69,74 +115,63 @@
               }
             }
           </style>
+
           <p class="subtext">
-            How just <b>ONE DRINK</b> added to your daily routine
-            <b>can STABILIZE BLOOD SUGAR levels in just 8 days...</b>
-            <br /><br />
-            Scientists say it works by powerfully removing
-            <b>a silent parasite hiding in your pancreas</b> — now known as the
-            biological <b>“root cause”</b> of unstable blood sugar. No meds. No
-            strict diets. <br /><br />
-            <b>Click the button below now</b> and watch this video before it's
-            taken down...
+            <b>Tap the button below</b> to watch the short presentation before
+            it disappears…
           </p>
-          <ul class="checks">
-            <li>
-              <i class="fa-solid fa-check"></i> Boost Weight Loss & Fat Loss
-            </li>
-            <li>
-              <i class="fa-solid fa-check"></i> Increase Mood, Energy, &
-              Vitality
-            </li>
-            <li>
-              <i class="fa-solid fa-check"></i> Sleep Better & Wake Up
-              Re-vitalized
-            </li>
-          </ul>
+
           <a href="https://pg.thehealth-now.site/pg" class="watch-button"
-            >Watch Now</a
+            >Watch the Video</a
           >
         </div>
       </div>
-    </main>
-    <footer>
-      <div>
+      <footer>
         <div>
-          <a href="terms.html">Terms of Service</a>
-          <a href="privacy.html">Privacy Policy</a>
-          <a href="disclaimer.html">Disclaimer</a>
-          <a href="refund.html">Refund</a>
+          <nav>
+            <a style="color: #5e89ff" href="terms.html">Terms of Service</a>
+            <a style="color: #5e89ff" href="privacy.html">Privacy Policy</a>
+            <a style="color: #5e89ff" href="disclaimer.html"
+              >Medical Disclaimer</a
+            >
+            <a style="color: #5e89ff" href="refund.html">Refund Policy</a>
+          </nav>
+
+          <p>
+            <strong>Medical Disclaimer:</strong> This product is a natural
+            dietary supplement, not a medication. These statements have not been
+            evaluated by the U.S. Food and Drug Administration (FDA), and the
+            product is not intended to diagnose, treat, cure, or prevent any
+            disease. The information provided on this website is for general
+            informational purposes only and is not a substitute for professional
+            medical advice. Always consult a licensed healthcare provider before
+            taking any supplement, especially if you have a medical condition or
+            are taking medication. Individual results may vary.
+          </p>
+
+          <p>
+            <strong>Marketing & Advertising Disclaimer:</strong> While we strive
+            to ensure that all product information and claims on this website
+            are accurate and compliant with advertising guidelines, we do not
+            guarantee any specific results from using this supplement.
+            Testimonials and endorsements reflect individual experiences and are
+            provided for illustrative purposes only. They are not guarantees of
+            similar outcomes. No content on this site should be considered a
+            promise of results or a claim of cure. We are not responsible for
+            any misinterpretation of our marketing materials.
+          </p>
+
+          <p>
+            <strong>Affiliate Disclosure:</strong> This website may contain
+            affiliate links to products. If you click on an affiliate link and
+            make a purchase, we may receive a small commission at no additional
+            cost to you. We only promote products and services that we genuinely
+            believe may be valuable to our users. This compensation does not
+            influence our content or recommendations. We appreciate your support
+            as it helps us maintain and improve our website.
+          </p>
         </div>
-        <p>
-          <strong>Disclaimer:</strong> These statements have not been evaluated
-          by the Food and Drug Administration. This product is not intended to
-          diagnose, treat, cure, or prevent any disease. This information is not
-          intended to be a substitute or replacement for any medical treatment.
-          Please seek the advice of a healthcare professional for your specific
-          health concerns. Individual results may vary.
-        </p>
-        <p>
-          <strong>Marketing Disclosure:</strong> This website is a marketplace.
-          As such, you should know that the owner has a monetary connection to
-          the product and services advertised on the site. The owner receives
-          payment whenever a qualified lead is referred but that is the extent
-          of it.
-        </p>
-        <p>
-          <strong>Advertising Disclosure:</strong> This website and the products
-          & services referred to on the site are advertising marketplaces. This
-          website is an advertisement and not a news publication. Any
-          photographs of persons used on this site are models. The owner of this
-          site and the products and services referred to on this site only
-          provides a service where consumers can obtain and compare.
-        </p>
-        <p>
-          <strong>Affiliate Disclosure:</strong> This website may contain
-          affiliate links, which means we may receive a commission if you click
-          on a link and make a purchase. This does not affect the price you pay
-          for the product or service.
-        </p>
-      </div>
-    </footer>
+      </footer>
+    </main>
   </body>
 </html>
