@@ -18,98 +18,139 @@
       rel="stylesheet"
     />
 
+    <!-- Favicon & Base CSS -->
     <link rel="icon" href="assets/oficial.png" type="image/png" />
     <link rel="stylesheet" type="text/css" href="css/style.css" />
 
+    <!-- QUICK OVERRIDES -->
     <style>
       :root {
-        --brand: #1d4ed8;
-        --accent: #2563eb;
-        --bg: #f0f9ff;
-        --text: #111827;
+        --brand-color: #1d4ed8;
+        --accent-color: #2563eb;
+        --bg-color: #f0f9ff;
+        --text-color: #111827;
       }
 
-      /* --- LAYOUT --- */
-      body {
-        display: flex; /* empilha hero + footer */
-        flex-direction: column;
-        min-height: 100vh;
+      /* ---- Reset básico ---- */
+      * {
+        box-sizing: border-box;
         margin: 0;
-        background: var(--bg);
-        color: var(--text);
-        font-family: "Roboto", sans-serif;
+        padding: 0;
       }
-      main.hero {
-        flex: 1; /* ocupa toda a viewport */
+      body {
+        font-family: Roboto, sans-serif;
+        background: var(--bg-color);
+        color: var(--text-color);
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        padding: 2rem 1rem;
+        min-height: 100vh; /* garante que o footer fique após a tela     */
       }
 
-      /* --- CONTEÚDO PRINCIPAL --- */
+      /* HERO cobre toda a viewport e centraliza o bloco interno */
+      .hero {
+        /* altura usando a viewport dinâmica — cobre iOS/Android modernos */
+        min-height: 70dvh; /* fallback ótimo para mobile */
+        display: flex;
+        justify-content: center; /* centro vertical do bloco */
+        align-items: center; /* centro horizontal         */
+        padding-inline: 1rem;
+        text-align: center;
+      }
+
+      /* bloco interno alinhado em coluna */
+      .hero__content {
+        display: flex;
+        flex-direction: column;
+        gap: 1.75rem; /* espaço entre título e botão */
+        max-width: 28rem;
+        align-items: center;
+      }
+
+      .headline {
+        font-size: 2rem;
+        font-weight: 700;
+      }
       .headline b {
-        color: var(--brand);
+        color: var(--brand-color);
       }
       .watch-button {
-        margin-top: 2rem;
-        background: var(--brand);
+        background: var(--brand-color);
         color: #fff;
-        padding: 1rem 2.5rem;
+        padding: 1rem 2.25rem;
         border-radius: 8px;
         font-weight: 700;
         text-decoration: none;
-        display: inline-block;
+        font-size: 1.125rem;
+        text-align: center;
       }
       .watch-button:hover {
-        background: var(--accent);
+        background: var(--accent-color);
       }
 
-      /* Esconde qualquer outro texto dentro da .hero (por ex. .subtext) */
-      .hero .subtext,
-      .hero .checks {
-        display: none;
+      /* Ajustes para telas ≤600 px */
+      @media (max-width: 600px) {
+        .headline {
+          font-size: 1.55rem;
+        }
+        .watch-button {
+          font-size: 1rem;
+          width: 90%;
+        }
       }
 
-      /* --- FOOTER --- */
+      /* ---- Footer (mantido) ---- */
       footer {
-        text-align: center;
+        width: 100%;
+        background: #101828; /* escuro para contraste                 */
+        color: #e4e7ec;
         padding: 2rem 1rem 3rem;
       }
+      footer nav {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-bottom: 1.25rem;
+      }
       footer nav a {
-        margin: 0 0.5rem;
+        color: #5e89ff;
         text-decoration: none;
-        color: var(--brand);
         font-weight: 500;
       }
       footer p {
-        max-width: 720px;
-        margin: 1rem auto;
-        font-size: 0.87rem;
-        line-height: 1.4;
+        font-size: 0.9rem;
+        line-height: 1.5;
+        max-width: 48rem;
+        margin: 0 auto 0.75rem;
       }
 
-      /* Pequeno ajuste para telas muito estreitas */
-      @media (max-width: 360px) {
+      /* ---------- MOBILE TWEAKS ---------- */
+      @media (max-width: 600px) {
+        .headline {
+          font-size: 1.5rem;
+        }
         .watch-button {
-          width: 100%;
-          padding: 1rem 0;
+          width: 90%;
+          font-size: 1rem;
+        }
+        footer p {
+          font-size: 0.8rem;
+          text-align: left;
+          padding: 0 0.25rem;
         }
       }
     </style>
 
-    <!-- TRACKING SCRIPT (inalterado) -->
+    <!-- TRACKING SCRIPT (unchanged) -->
     <script>
       function getURLParameters() {
-        const p = {},
+        const params = {},
           q = window.location.search.substring(1).split("&");
-        q.forEach((s) => {
-          const [k, v] = s.split("=");
-          if (k) p[decodeURIComponent(k)] = decodeURIComponent(v);
+        q.forEach((p) => {
+          const [k, v] = p.split("=");
+          if (k) params[decodeURIComponent(k)] = decodeURIComponent(v);
         });
-        return p;
+        return params;
       }
       function appendParamsToLinks() {
         const p = getURLParameters();
@@ -126,49 +167,67 @@
   </head>
 
   <body>
-    <!-- HERO SECTION -->
-    <main class="hero" id="container">
-      <h1 class="headline">
-        A Simple Morning <b>“CINNAMON TONIC”</b><br />
-        Balanced My High Blood Sugar
-      </h1>
+    <!-- HERO -->
+    <main class="hero">
+      <div class="hero__content">
+        <!-- novo wrapper -->
+        <h1 class="headline" href="https://pg.thewellbeing.site/pg">
+          A Simple Morning <b>“CINNAMON&nbsp;TONIC”</b><br />
+          Balanced My High Blood Sugar
+        </h1>
 
-      <a href="https://pg.thewellbeing.site/wp" class="watch-button">
-        Watch the Video
-      </a>
+        <a href="https://pg.thewellbeing.site/pg" class="watch-button">
+          Watch the Video
+        </a>
+      </div>
     </main>
 
-    <!-- FOOTER (abaixo da dobra) -->
+    <!-- FOOTER (idêntico ao fornecido) -->
     <footer>
-      <nav>
-        <a href="terms.html">Terms of Service</a>
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="disclaimer.html">Medical Disclaimer</a>
-        <a href="refund.html">Refund Policy</a>
-      </nav>
+      <div>
+        <nav>
+          <a style="color: #5e89ff" href="terms.html">Terms of Service</a>
+          <a style="color: #5e89ff" href="privacy.html">Privacy Policy</a>
+          <a style="color: #5e89ff" href="disclaimer.html"
+            >Medical Disclaimer</a
+          >
+          <a style="color: #5e89ff" href="refund.html">Refund Policy</a>
+        </nav>
 
-      <p>
-        <strong>Medical Disclaimer:</strong> This product is a natural dietary
-        supplement, not a medication. These statements have not been evaluated
-        by the U.S. Food & Drug Administration (FDA). This product is not
-        intended to diagnose, treat, cure, or prevent any disease. Information
-        on this site is for educational purposes only and should not replace
-        professional medical advice. Always consult a licensed healthcare
-        provider before use. Individual results may vary.
-      </p>
+        <p>
+          <strong>Medical Disclaimer:</strong> This product is a natural dietary
+          supplement, not a medication. These statements have not been evaluated
+          by the U.S. Food and Drug Administration (FDA), and the product is not
+          intended to diagnose, treat, cure, or prevent any disease. The
+          information provided on this website is for general informational
+          purposes only and is not a substitute for professional medical advice.
+          Always consult a licensed healthcare provider before taking any
+          supplement, especially if you have a medical condition or are taking
+          medication. Individual results may vary.
+        </p>
 
-      <p>
-        <strong>Marketing & Advertising Disclaimer:</strong> This page is a paid
-        advertisement. Product descriptions are provided by the advertiser.
-        Results are not guaranteed and may vary. Images may depict models and
-        are used for illustrative purposes only.
-      </p>
+        <p>
+          <strong>Marketing & Advertising Disclaimer:</strong> While we strive
+          to ensure that all product information and claims on this website are
+          accurate and compliant with advertising guidelines, we do not
+          guarantee any specific results from using this supplement.
+          Testimonials and endorsements reflect individual experiences and are
+          provided for illustrative purposes only. They are not guarantees of
+          similar outcomes. No content on this site should be considered a
+          promise of results or a claim of cure. We are not responsible for any
+          misinterpretation of our marketing materials.
+        </p>
 
-      <p>
-        <strong>Affiliate Disclosure:</strong> Links on this site may be
-        affiliate links. If you purchase through them, we may earn a commission
-        at no additional cost to you.
-      </p>
+        <p>
+          <strong>Affiliate Disclosure:</strong> This website may contain
+          affiliate links to products. If you click on an affiliate link and
+          make a purchase, we may receive a small commission at no additional
+          cost to you. We only promote products and services that we genuinely
+          believe may be valuable to our users. This compensation does not
+          influence our content or recommendations. We appreciate your support
+          as it helps us maintain and improve our website.
+        </p>
+      </div>
     </footer>
   </body>
 </html>
